@@ -28,7 +28,22 @@ The full cluster recipe ships to clients in the MCP initialize handshake, so a f
 
 None beyond a hypervisor for the nodes. The server is a single Go binary; `talosctl` is auto-installed if absent.
 
-## Building
+## Installing
+
+Published on the [official MCP Registry](https://registry.modelcontextprotocol.io)
+as `io.github.bryanjbelanger/talos-mcp-server` — that name is what
+registry-aware clients install by
+([current entry](https://registry.modelcontextprotocol.io/v0/servers?search=io.github.bryanjbelanger/talos-mcp-server&version=latest)).
+
+For hosts that support MCP Bundles, download the `.mcpb` from the
+[latest release](https://github.com/bryanjbelanger/talos-mcp-server/releases/latest)
+and open it. One bundle covers every platform; it carries a binary per
+(os, arch) and picks one at startup. The server needs no configuration —
+guest credentials and endpoints are per-call parameters, and `talosctl` is
+auto-installed on first use if the host has none.
+
+Otherwise take the bare binary for your platform from the same release, or
+build it:
 
 ```bash
 go build -o talos-mcp-server .

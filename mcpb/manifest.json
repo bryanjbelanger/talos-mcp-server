@@ -1,0 +1,40 @@
+{
+  "manifest_version": "0.3",
+  "name": "talos-mcp-server",
+  "display_name": "Talos Linux",
+  "version": "__VERSION__",
+  "description": "Talos Linux cluster operations as one thin MCP tool over the official machine API.",
+  "long_description": "One MCP tool with typed actions covering the Talos cluster hot path — gen_config, apply_config, bootstrap, kubeconfig, health, config_merge — plus a raw passthrough for the long tail (etcd, logs, reboot, upgrade). The backend is talosctl, the official gRPC client of the Talos machine API: an existing PATH install is preferred, otherwise the correct binary for the host is auto-installed from the official Sidero release, verified against GitHub's asset digest. The full cluster bring-up recipe ships in the MCP initialize handshake. Pairs with desktop-hypervisor-mcp for node provisioning while staying deliberately hypervisor-agnostic.",
+  "author": {
+    "name": "Bryan Belanger",
+    "url": "https://github.com/bryanjbelanger"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bryanjbelanger/talos-mcp-server.git"
+  },
+  "homepage": "https://github.com/bryanjbelanger/talos-mcp-server",
+  "documentation": "https://github.com/bryanjbelanger/talos-mcp-server#readme",
+  "support": "https://github.com/bryanjbelanger/talos-mcp-server/issues",
+  "license": "MIT",
+  "keywords": ["talos", "kubernetes", "talosctl", "cluster", "devops"],
+  "server": {
+    "type": "binary",
+    "entry_point": "server/launch.sh",
+    "mcp_config": {
+      "command": "${__dirname}/server/launch.sh",
+      "args": [],
+      "platform_overrides": {
+        "win32": {
+          "command": "${__dirname}/server/talos-mcp-server-windows-amd64.exe"
+        }
+      }
+    }
+  },
+  "tools": [
+    { "name": "talos", "description": "Typed actions for the Talos cluster path (gen_config, apply_config, bootstrap, kubeconfig, health, config_merge, version) plus raw talosctl passthrough" }
+  ],
+  "compatibility": {
+    "platforms": ["darwin", "win32", "linux"]
+  }
+}
