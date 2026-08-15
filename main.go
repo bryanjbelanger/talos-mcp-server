@@ -98,7 +98,7 @@ func fetchHTTPS(ctx context.Context, rawURL, destPath, wantSHA string) (string, 
 	if err != nil {
 		return "", err
 	}
-	client := &http.Client{Timeout: 30 * time.Minute}
+	client := httpClient(30 * time.Minute)
 	resp, err := client.Do(req)
 	if err != nil {
 		return "", fmt.Errorf("download failed: %w", err)
@@ -163,7 +163,7 @@ func githubRelease(ctx context.Context, repo, version string) (*ghRelease, error
 		return nil, err
 	}
 	req.Header.Set("Accept", "application/vnd.github+json")
-	client := &http.Client{Timeout: 30 * time.Second}
+	client := httpClient(30 * time.Second)
 	resp, err := client.Do(req)
 	if err != nil {
 		return nil, fmt.Errorf("GitHub API request failed: %w", err)
