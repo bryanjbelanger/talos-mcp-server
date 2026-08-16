@@ -424,7 +424,7 @@ Cluster bring-up over nodes provisioned by a hypervisor MCP server (e.g. virtual
 Sizing guidance: control plane 4 CPUs/4096MB (minimum 2/2048), workers 2 CPUs/2048MB (minimum 1/1024), disks 10GB+.`
 
 func main() {
-	server := mcp.NewServer(&mcp.Implementation{Name: "talos-mcp-server", Version: "1.1.1"},
+	server := mcp.NewServer(&mcp.Implementation{Name: "talos-mcp-server", Version: "1.1.2"},
 		&mcp.ServerOptions{Instructions: serverInstructions})
 
 	mcp.AddTool(server, &mcp.Tool{Name: "talos", Description: "Talos Linux operations: typed actions for the cluster path (gen_config, apply_config, bootstrap, kubeconfig, health, config_merge, version) plus action=run for any raw talosctl argv. Backend is talosctl — the official Talos machine-API gRPC client — auto-installed digest-verified when the host has none (existing PATH install preferred). action=resolve reports platform/install state without downloading or running."}, talosTool)
